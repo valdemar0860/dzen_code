@@ -1,14 +1,18 @@
 FROM python:3.11
 
 WORKDIR /dzen_code
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 RUN useradd --create-home userapi
 
 COPY . /dzen_code
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-#RUN django-admin startproject dzen_code .
-#RUN python manage.py makemigrations
-#RUN python manage.py migrate
+RUN python dzen_code/manage.py makemigrations
+RUN python dzen_code/manage.py migrate
 
 USER userapi
 EXPOSE 8000
