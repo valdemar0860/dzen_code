@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'user_management.apps.UserManagementConfig',
     'comments.apps.CommentsConfig',
     'rest_framework',
+    'django_filters',
     'rest_framework_simplejwt',
     'captcha',
 ]
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'dzen_code.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
