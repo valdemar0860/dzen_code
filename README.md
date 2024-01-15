@@ -33,12 +33,16 @@
 
 Якщо у вас встановлено Docker, ви можете також запустити **dzen_code** за допомогою Docker. Вам потрібно лише скопіювати файли та виконати наступні команди:
 
-```bash
+
 # Будуємо Docker імедж
-docker build -t dzen_code .
+   ```bash
+   docker build -t dzen_code .
+   ```
 
 # Запускаємо контейнер
-docker run -p 8000:8000 dzen_code
+   ```bash
+   docker run -p 8000:8000 dzen_code
+   ```
 
 ## Використання
 
