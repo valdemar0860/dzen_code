@@ -2,16 +2,27 @@ import re
 from PIL import Image
 from rest_framework import serializers
 from captcha.fields import CaptchaField
+from django.utils import timezone
+from django.contrib.auth import get_user_model
 
 from .models import Comment
 
+User = get_user_model()
+
 
 class CommentSerializer(serializers.ModelSerializer):
-    captcha = CaptchaField()
+    captcha = CaptchaField(read_only=True)
 
     class Meta:
         model = Comment
         fields = '__all__'
+        read_only_fields = ['user', 'date_added']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        validated_data['date_added'] = timezone.now()
+        return super().create(validated_data)
 
     def validate_html_tags(text):
         allowed_tags = ['a', 'code', 'i', 'strong']
